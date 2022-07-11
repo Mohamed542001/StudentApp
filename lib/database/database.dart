@@ -12,6 +12,10 @@ class DatabaseHelper {
   static final columnId = 'id';
   static final columnUser = 'user';
   static final columnPassword = 'password';
+  static final columnAddress = 'address';
+  static final columnPhone = 'phone';
+  static final columnDestination = 'destination';
+  static final columnTicketNumber = 'ticketNumber';
   static final columnModelData = 'model_data';
 
   DatabaseHelper._privateConstructor();
@@ -37,6 +41,10 @@ class DatabaseHelper {
             $columnId INTEGER PRIMARY KEY,
             $columnUser TEXT NOT NULL,
             $columnPassword TEXT NOT NULL,
+            $columnAddress TEXT NOT NULL,
+            $columnPhone TEXT NOT NULL,
+            $columnTicketNumber TEXT NOT NULL,
+            $columnDestination TEXT NOT NULL,
             $columnModelData TEXT NOT NULL UNIQUE
           )
           ''');

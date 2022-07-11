@@ -21,7 +21,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   late CameraDescription cameraDescription;
   bool loading = false;
-  String githubUrl = "https://github.com/The-Assembly";
+
 
   @override
   void initState() {
@@ -33,7 +33,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
       appBar: AppBar(
         leading: Container(),
         elevation: 0,
@@ -78,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Column(
                   children: const [
                     Text(
-                      "FACE RECOGNITION AUTHENTICATION",
+                      "Welcome",
                       style: TextStyle(
                           fontSize: 25, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
@@ -86,13 +85,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     SizedBox(
                       height: 20,
                     ),
-                    Text(
-                      "Demo application that uses Flutter and tensorflow to implement authentication with facial recognition",
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
+                    // Text(
+                    //   "Demo application that uses Flutter and tensorflow to implement authentication with facial recognition",
+                    //   style: TextStyle(
+                    //     fontSize: 16,
+                    //   ),
+                    //   textAlign: TextAlign.center,
+                    // ),
                   ],
                 ),
               ),
@@ -129,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'LOGIN',
+                            'Chech Passenger',
                             style: TextStyle(color: Color(0xFF0F0BDB)),
                           ),
                           SizedBox(
@@ -174,7 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'SIGN UP',
+                            'Add Passenger',
                             style: TextStyle(color: Colors.white),
                           ),
                           SizedBox(

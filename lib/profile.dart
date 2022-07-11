@@ -1,30 +1,29 @@
 import 'dart:io';
-
 import 'package:facedetectionattandanceapp/home_page.dart';
 import 'package:facedetectionattandanceapp/widgets/app_button.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter/material.dart';
-import 'dart:math'as math;
-class Profile extends StatelessWidget {
-   Profile(this.username, { Key? key, required this.imagePath}) : super(key: key);
-  final String username;
-  final String imagePath;
-  String githubUrl = "https://github.com/The-Assembly";
 
-  void _launchURL()async=>
-      await canLaunch(githubUrl)?await
-          launch(githubUrl)
-          :throw 'could not launch $githubUrl';
+class Profile extends StatelessWidget {
+   Profile(this.username, { Key? key, required this.imagePath,
+     required this.destination, required this.ticketNumber,
+   required this.phone,required this.address}) : super(key: key);
+  final String username;
+  final String address;
+  final String phone;
+  final String ticketNumber;
+  final String destination;
+  final String imagePath;
+
+
   @override
   Widget build(BuildContext context) {
-    final double mirror = math.pi;
     return Scaffold(
       backgroundColor: Color(0XFFC7FFBE),
       body: SafeArea(
         child: Container(
           child: Column(
             children: [
+              SizedBox(height: 50,),
               Row(
                 children: [
                   Container(
@@ -37,8 +36,8 @@ class Profile extends StatelessWidget {
                       ),
                     ),
                     margin: EdgeInsets.all(20),
-                    width: 50,
-                    height: 50,
+                    width: 100,
+                    height: 100,
                     // child: Transform(
                     //     alignment: Alignment.center,
                     //     child: FittedBox(
@@ -46,10 +45,12 @@ class Profile extends StatelessWidget {
                     //       child: Image.file(File(imagePath)),
                     //     ),
                     //     transform: Matrix4.rotationY(mirror)),
-                  ),
-                  Text(
-                    'Hi ' + username + '!',
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+                  ), 
+                  Expanded(
+                    child: Text(
+                      'Hi ' + username + '!',
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+                    ),
                   ),
                 ],
               ),
@@ -69,10 +70,70 @@ class Profile extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
-                    Text(
-                      '''If you think this project seems interesting and need some help implementing it, dont hesitate and lets get in touch!''',
-                      style: TextStyle(fontSize: 16),
-                      textAlign: TextAlign.left,
+                    Row(
+                      children: [
+                        Text(
+                          "Passenger Data:",
+                          style: TextStyle(fontSize: 16),
+                          textAlign: TextAlign.left,
+                        ),
+                      ],
+                    ),
+                    Divider(
+                      height: 30,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text( 
+                            "Age : " + phone,
+                            style: TextStyle(fontSize: 16),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Divider(
+                      height: 30,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "Address: " + address,
+                            style: TextStyle(fontSize: 16),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Divider(
+                      height: 30,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "Ticket Number: " + ticketNumber,
+                            style: TextStyle(fontSize: 16),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Divider(
+                      height: 30,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "Destination: " + destination,
+                            style: TextStyle(fontSize: 16),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ],
                     ),
                     Divider(
                       height: 30,

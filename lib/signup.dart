@@ -124,7 +124,7 @@ class _SignUpState extends State<SignUp> {
               },
             ),
             CameraHeader(
-              "SIGN UP",
+              "Add Passenger",
               onBackPressed: _onBackPressed,
             )
           ],

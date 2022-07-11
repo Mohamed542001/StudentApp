@@ -112,7 +112,7 @@ class _SignInState extends State<SignIn> {
                 }
               }),
           CameraHeader(
-            "LOGIN",
+            "Check Passenger",
             onBackPressed: _onBackPressed,
           )
         ],

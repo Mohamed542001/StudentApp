@@ -6,6 +6,7 @@ import 'package:facedetectionattandanceapp/services/camera_service.dart';
 import 'package:facedetectionattandanceapp/services/facenet_service.dart';
 import 'package:facedetectionattandanceapp/widgets/app_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'app_text_field.dart';
 
 class AuthActionButton extends StatefulWidget {
@@ -26,6 +27,11 @@ final TextEditingController _userTextEditingController =
 TextEditingController(text: '');
 final TextEditingController _passwordTextEditingController =
 TextEditingController(text: '');
+final TextEditingController _addressTextEditingController =
+TextEditingController(text: '');
+final TextEditingController _phoneTextEditingController = TextEditingController(text: '');
+final TextEditingController _ticketNumberTextEditingController = TextEditingController(text: '');
+final TextEditingController _destinationTextEditingController = TextEditingController(text: '');
 
  User? predictedUser;
 
@@ -36,9 +42,17 @@ Future _signUp(context) async {
   print('AuthactionPredicatedData: $predictedData');
   String? user = _userTextEditingController.text;
   String? password = _passwordTextEditingController.text;
+  String? address = _addressTextEditingController.text;
+  String? phone = _phoneTextEditingController.text;
+  String? destination = _destinationTextEditingController.text;
+  String? ticketNumber = _ticketNumberTextEditingController.text;
   User userToSave = User(
     user: user,
     password: password,
+    address: address,
+    phone: phone,
+    destination: destination,
+    ticketNumber: ticketNumber,
     modelData: predictedData,
   );
   /// creates a new user in the 'database'
@@ -63,6 +77,10 @@ Future _signIn(context) async {
             builder: (BuildContext context) => Profile(
               predictedUser!.user,
               imagePath: _cameraService.imagePath!,
+              phone: predictedUser!.phone,
+              address: predictedUser!.address,
+              ticketNumber: predictedUser!.ticketNumber,
+              destination: predictedUser!.destination,
             )));
   } else {
     showDialog(
@@ -101,6 +119,12 @@ class _AuthActionButtonState extends State<AuthActionButton> {
                    predictedUser = user;
                 }else{
                   predictedUser=null;
+                  // Navigator.pop(context);
+                   // Container(
+                   //    child: Text(
+                   //      'User not found 😞',
+                   //      style: TextStyle(fontSize: 20),
+                   //    ));
                 }
             }
 
@@ -153,72 +177,110 @@ class _AuthActionButtonState extends State<AuthActionButton> {
   signSheet(context, User? predictedUser) {
     return Container(
       padding: EdgeInsets.all(20),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          widget.isLogin && predictedUser != null
-              ? Container(
-            child: Text(
-              'Welcome back, ' + predictedUser.user + '.',
-              style: TextStyle(fontSize: 20),
-            ),
-
-          )
-              : widget.isLogin
-              ? Container(
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            widget.isLogin && predictedUser != null
+                ? Container(
               child: Text(
-                'User not found 😞',
+                'Welcome back, ' + predictedUser.user + '.',
                 style: TextStyle(fontSize: 20),
-              ))
-              : Container(),
-          Container(
-            child: Column(
-              children: [
-                !widget.isLogin
-                    ? AppTextField(
-                  controller: _userTextEditingController,
-                  labelText: "Your Name",
-                )
-                    : Container(),
-                SizedBox(height: 10),
-                widget.isLogin && predictedUser == null
-                    ? Container()
-                    : AppTextField(
-                  controller: _passwordTextEditingController,
-                  labelText: "Password",
-                  isPassword: true,
-                ),
-                SizedBox(height: 10),
-                Divider(),
-                SizedBox(height: 10),
-                widget.isLogin && predictedUser != null
-                    ? AppButton(
-                  text: 'LOGIN',
-                  onPressed: () async {
-                    _signIn(context);
-                  },
-                  icon: Icon(
-                    Icons.login,
-                    color: Colors.white,
+              ),
+
+            )
+                : widget.isLogin
+                ? Container(
+                child: Text(
+                  'User not found 😞',
+                  style: TextStyle(fontSize: 20),
+                ))
+                : Container(),
+            Container(
+              child: Column(
+                children: [
+                  !widget.isLogin
+                      ? AppTextField(
+                    controller: _userTextEditingController,
+                    labelText: "Your Name",
+                  )
+                      : Container(),
+                  SizedBox(height: 10),
+
+                  !widget.isLogin
+                      ? AppTextField(
+                    controller: _addressTextEditingController,
+                    labelText: "Your Address",
+                  )
+                      : Container(),
+
+                  SizedBox(height: 10),
+
+                  !widget.isLogin
+                      ? AppTextField(
+                    controller: _phoneTextEditingController,
+                    keyboardType: TextInputType.phone,
+                    labelText: "Your Age",
+                  )
+                      : Container(),
+                  SizedBox(height: 10),
+
+                  !widget.isLogin
+                      ? AppTextField(
+                    controller: _ticketNumberTextEditingController,
+                    keyboardType: TextInputType.phone,
+                    labelText: "Ticket Number",
+                  )
+                      : Container(),
+                  SizedBox(height: 10),
+
+                  !widget.isLogin
+                      ? AppTextField(
+                    controller: _destinationTextEditingController,
+                    labelText: "Destination",
+                  )
+                      : Container(),
+                  SizedBox(height: 10),
+
+                  widget.isLogin && predictedUser == null
+                      ? Container()
+                      : AppTextField(
+                    controller: _passwordTextEditingController,
+                    labelText: "Password",
+                    isPassword: true,
                   ),
-                )
-                    : !widget.isLogin?
-                     AppButton(
-                  text: 'SIGN UP',
-                  onPressed: () async {
-                    await _signUp(context);
-                  },
-                  icon: Icon(
-                    Icons.person_add,
-                    color: Colors.white,
-                  ),
-                )
-                    : Container(),
-              ],
+                  SizedBox(height: 10),
+                  Divider(),
+                  SizedBox(height: 10),
+                  widget.isLogin && predictedUser != null
+                      ? AppButton(
+                    text: 'LOGIN',
+                    onPressed: () async {
+                      _signIn(context);
+                    },
+                    icon: Icon(
+                      Icons.login,
+                      color: Colors.white,
+                    ),
+                  )
+                      : !widget.isLogin?
+                       AppButton(
+                    text: 'REGISTER',
+                    onPressed: () async {
+                      await _signUp(context);
+                    },
+                    icon: Icon(
+                      Icons.person_add,
+                      color: Colors.white,
+                    ),
+                  )
+                      : Container(),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
 
