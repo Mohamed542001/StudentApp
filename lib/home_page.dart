@@ -128,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Chech Passenger',
+                            'Check Passenger',
                             style: TextStyle(color: Color(0xFF0F0BDB)),
                           ),
                           SizedBox(

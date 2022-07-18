@@ -2,6 +2,7 @@ import 'package:facedetectionattandanceapp/database/database.dart';
 import 'package:facedetectionattandanceapp/home_page.dart';
 import 'package:facedetectionattandanceapp/models/user_model.dart';
 import 'package:facedetectionattandanceapp/profile.dart';
+import 'package:facedetectionattandanceapp/registration_screen.dart';
 import 'package:facedetectionattandanceapp/services/camera_service.dart';
 import 'package:facedetectionattandanceapp/services/facenet_service.dart';
 import 'package:facedetectionattandanceapp/widgets/app_button.dart';
@@ -37,7 +38,7 @@ final TextEditingController _destinationTextEditingController = TextEditingContr
 
 Future _signUp(context) async {
   /// gets predicted data from facenet service (user face detected)
-  DatabaseHelper _databaseHelper = DatabaseHelper.instance;
+  // DatabaseHelper _databaseHelper = DatabaseHelper.instance;
   List? predictedData = _faceNetService.predictedData;
   print('AuthactionPredicatedData: $predictedData');
   String? user = _userTextEditingController.text;
@@ -46,23 +47,33 @@ Future _signUp(context) async {
   String? phone = _phoneTextEditingController.text;
   String? destination = _destinationTextEditingController.text;
   String? ticketNumber = _ticketNumberTextEditingController.text;
-  User userToSave = User(
-    user: user,
-    password: password,
-    address: address,
-    phone: phone,
-    destination: destination,
-    ticketNumber: ticketNumber,
-    modelData: predictedData,
-  );
+  // User userToSave = User(
+  //   user: user,
+  //   password: password,
+  //   address: address,
+  //   phone: phone,
+  //   destination: destination,
+  //   ticketNumber: ticketNumber,
+  //   modelData: predictedData,
+  // );
   /// creates a new user in the 'database'
    print("dataFromdatabase555==$predictedData");
-  await _databaseHelper.insert(userToSave);
+  // await _databaseHelper.insert(userToSave);
+  Navigator.push(context,
+      MaterialPageRoute(builder: (BuildContext context) => RegistrationScreen(
+        user: user,
+        password: password,
+        address: address,
+        phone: phone,
+        destination: destination,
+        ticketNumber: ticketNumber,
+        modelData: predictedData,
+      )));
   _faceNetService.setPredictedData(null);
   _userTextEditingController.text="";
   _passwordTextEditingController.text="";
-  Navigator.push(context,
-      MaterialPageRoute(builder: (BuildContext context) => MyHomePage()));
+  // Navigator.push(context,
+  //     MaterialPageRoute(builder: (BuildContext context) => MyHomePage()));
 }
   /// resets the face stored in the face net sevice
 
@@ -76,6 +87,9 @@ Future _signIn(context) async {
         MaterialPageRoute(
             builder: (BuildContext context) => Profile(
               predictedUser!.user,
+              ticketType: predictedUser!.ticketType,
+              oneWay: predictedUser!.oneWay,
+              from: predictedUser!.from,
               imagePath: _cameraService.imagePath!,
               phone: predictedUser!.phone,
               address: predictedUser!.address,
@@ -226,22 +240,22 @@ class _AuthActionButtonState extends State<AuthActionButton> {
                       : Container(),
                   SizedBox(height: 10),
 
-                  !widget.isLogin
-                      ? AppTextField(
-                    controller: _ticketNumberTextEditingController,
-                    keyboardType: TextInputType.phone,
-                    labelText: "Ticket Number",
-                  )
-                      : Container(),
-                  SizedBox(height: 10),
+                  // !widget.isLogin
+                  //     ? AppTextField(
+                  //   controller: _ticketNumberTextEditingController,
+                  //   keyboardType: TextInputType.phone,
+                  //   labelText: "Ticket Number",
+                  // )
+                  //     : Container(),
+                  // SizedBox(height: 10),
 
-                  !widget.isLogin
-                      ? AppTextField(
-                    controller: _destinationTextEditingController,
-                    labelText: "Destination",
-                  )
-                      : Container(),
-                  SizedBox(height: 10),
+                  // !widget.isLogin
+                  //     ? AppTextField(
+                  //   controller: _destinationTextEditingController,
+                  //   labelText: "Destination",
+                  // )
+                  //     : Container(),
+                  // SizedBox(height: 10),
 
                   widget.isLogin && predictedUser == null
                       ? Container()

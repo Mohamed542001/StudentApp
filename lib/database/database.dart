@@ -16,6 +16,9 @@ class DatabaseHelper {
   static final columnPhone = 'phone';
   static final columnDestination = 'destination';
   static final columnTicketNumber = 'ticketNumber';
+  static final columnfrom = 'fromCity';
+  static final columnoneWay = 'oneWay';
+  static final columnTickeType = 'ticketType';
   static final columnModelData = 'model_data';
 
   DatabaseHelper._privateConstructor();
@@ -45,6 +48,9 @@ class DatabaseHelper {
             $columnPhone TEXT NOT NULL,
             $columnTicketNumber TEXT NOT NULL,
             $columnDestination TEXT NOT NULL,
+            $columnoneWay TEXT NOT NULL,
+            $columnfrom TEXT NOT NULL,
+            $columnTickeType TEXT NOT NULL,
             $columnModelData TEXT NOT NULL UNIQUE
           )
           ''');

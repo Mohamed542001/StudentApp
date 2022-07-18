@@ -7,6 +7,9 @@ class User {
   String phone;
   String ticketNumber;
   String destination;
+  String from;
+  String ticketType;
+  String oneWay;
   List modelData;
 
   User({
@@ -16,6 +19,9 @@ class User {
     required this.phone,
     required this.ticketNumber,
     required this.destination,
+    required this.from,
+    required this.ticketType,
+    required this.oneWay,
     required this.modelData,
   });
 
@@ -27,6 +33,9 @@ class User {
       phone: user['phone'],
       destination: user['destination'],
       ticketNumber: user['ticketNumber'],
+      from: user['fromCity'],
+      ticketType: user['ticketType'],
+      oneWay: user['oneWay'],
       modelData: jsonDecode(user['model_data']),
     );
   }
@@ -39,6 +48,9 @@ class User {
       'phone': phone,
       'destination': destination,
       'ticketNumber': ticketNumber,
+      'fromCity': from,
+      'oneWay': oneWay,
+      'ticketType': ticketType,
       'model_data': jsonEncode(modelData),
     };
   }

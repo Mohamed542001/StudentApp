@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:facedetectionattandanceapp/home_page.dart';
 import 'package:facedetectionattandanceapp/widgets/app_button.dart';
 import 'package:flutter/material.dart';
@@ -6,24 +7,43 @@ import 'package:flutter/material.dart';
 class Profile extends StatelessWidget {
    Profile(this.username, { Key? key, required this.imagePath,
      required this.destination, required this.ticketNumber,
-   required this.phone,required this.address}) : super(key: key);
+   required this.phone,required this.address,
+   required this.oneWay,required this.ticketType,
+   required this.from,
+   }) : super(key: key);
   final String username;
   final String address;
   final String phone;
   final String ticketNumber;
   final String destination;
   final String imagePath;
-
+  final String from;
+  final String oneWay;
+  final String ticketType;
+   int hallNumber = 0;
+   int randomNumber = 0;
+   getRandomTicket(){
+     Random random = new Random();
+     Random random1 = new Random();
+      randomNumber = random.nextInt(17);
+      hallNumber = random.nextInt(5);
+   }
+   List tickets = [1254125,546561,155146,3213543,1546553,4543354,346834,354355,243543,
+   13543545,3543555,1212121,54354354,45433543,3543778,22215122,001254621,5526448888];
+  List hallNum = [1,2,3,4,5,6];
 
   @override
   Widget build(BuildContext context) {
+    getRandomTicket();
     return Scaffold(
       backgroundColor: Color(0XFFC7FFBE),
       body: SafeArea(
         child: Container(
-          child: Column(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: ListView(
             children: [
-              SizedBox(height: 50,),
+              SizedBox(height: 10,),
               Row(
                 children: [
                   Container(
@@ -45,7 +65,7 @@ class Profile extends StatelessWidget {
                     //       child: Image.file(File(imagePath)),
                     //     ),
                     //     transform: Matrix4.rotationY(mirror)),
-                  ), 
+                  ),
                   Expanded(
                     child: Text(
                       'Hi ' + username + '!',
@@ -63,13 +83,6 @@ class Profile extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    Icon(
-                      Icons.warning_amber_outlined,
-                      size: 30,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
                     Row(
                       children: [
                         Text(
@@ -85,7 +98,7 @@ class Profile extends StatelessWidget {
                     Row(
                       children: [
                         Expanded(
-                          child: Text( 
+                          child: Text(
                             "Age : " + phone,
                             style: TextStyle(fontSize: 16),
                             textAlign: TextAlign.left,
@@ -114,7 +127,21 @@ class Profile extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            "Ticket Number: " + ticketNumber,
+                            "Ticket Number: " + tickets[hallNumber].toString(),
+                            style: TextStyle(fontSize: 16),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Divider(
+                      height: 30,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "From City: " + from,
                             style: TextStyle(fontSize: 16),
                             textAlign: TextAlign.left,
                           ),
@@ -138,24 +165,67 @@ class Profile extends StatelessWidget {
                     Divider(
                       height: 30,
                     ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "One-Way: " + oneWay,
+                            style: TextStyle(fontSize: 16),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Divider(
+                      height: 30,
+                    ),
+
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "Ticket Type: " + ticketType,
+                            style: TextStyle(fontSize: 16),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Divider(
+                      height: 30,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "Hall Number: " + hallNum[hallNumber].toString(),
+                            style: TextStyle(fontSize: 16),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ],
+                    ),
 
                   ],
                 ),
               ),
               Spacer(),
-              AppButton(
-                text: "LOG OUT",
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MyHomePage()),
-                  );
-                },
-                icon: Icon(
-                  Icons.logout,
-                  color: Colors.white,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                child: AppButton(
+                  text: "LOG OUT",
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyHomePage()),
+                    );
+                  },
+                  icon: Icon(
+                    Icons.logout,
+                    color: Colors.white,
+                  ),
+                  color: Color(0xFFFF6161),
                 ),
-                color: Color(0xFFFF6161),
               ),
               SizedBox(
                 height: 20,
